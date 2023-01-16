@@ -16,7 +16,7 @@ import jakarta.servlet.http.*;
 
 /**
  *
- * @author Faisal
+ * @author Wajeeha
  */
 @WebServlet(name = "RemoveInstituteServlet", urlPatterns = {"/RemoveInstituteServlet"})
 public class RemoveInstituteServlet extends HttpServlet {
