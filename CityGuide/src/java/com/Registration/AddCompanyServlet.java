@@ -15,14 +15,18 @@ import java.util.logging.Logger;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
+
+
 /**
  *
  * @author Faisal
  */
-@WebServlet(name = "RemoveCompany", urlPatterns = {"/RemoveCompany"})
-public class RemoveCompany extends HttpServlet {
+@WebServlet(name = "AddCompanyServlet", urlPatterns = {"/AddCompanyServlet"})
+public class AddCompanyServlet extends HttpServlet {
 
-@Override
+    private Registration ob=new Registration();
+
+    @Override
     protected void doGet(jakarta.servlet.http.HttpServletRequest request, jakarta.servlet.http.HttpServletResponse response)
             throws jakarta.servlet.ServletException, IOException {
             response.getWriter().append("Server at").append(request.getContextPath());
@@ -40,43 +44,44 @@ public class RemoveCompany extends HttpServlet {
             
             throws jakarta.servlet.ServletException, IOException {
         String forwardreq="home.jsp";
-        boolean flag=true;        
+        boolean flag=true;
         try {
-           if(request.getParameter("Delete") != null)
+           if(request.getParameter("Add") != null)
            {
                DataBaseConnection db=new DataBaseConnection();
                 db.setConnection();
                 
-            String name=request.getParameter("Name");
-            if(name.equals("") )
+            String Name=request.getParameter("Name");
+            String location=request.getParameter("Location");
+            
+            String review=request.getParameter("Review");
+            if(Name.equals("") || location.equals("")  || review.equals(""))
             {
                forwardreq="Error.jsp";
                flag=false;
             }
-         
-            if(!db.searchInstitute(name))
+            
+            if(flag) //it means no error in above checks
             {
-                
-               forwardreq="Error3.jsp";
-            flag=false;
-            }
-            if(flag)
-            {
-                db.deleteCompany(name);
+            ob.set_Name(Name);
+            ob.set_location(location);
+      
+            ob.set_review(review);
+            db.addCompany(ob);
             }
            }
             RequestDispatcher dis=request.getRequestDispatcher(forwardreq);
             dis.forward(request, response);
            // processRequest(request, respons
         } catch (SQLException ex) {
-        Logger.getLogger(RemoveInstituteServlet.class.getName()).log(Level.SEVERE, null, ex);
-    }
+            Logger.getLogger(AddInstitueServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     
     @Override
     public String getServletInfo() {
         return "Short description";
-    }
+    }// </editor-fold>
 
 }

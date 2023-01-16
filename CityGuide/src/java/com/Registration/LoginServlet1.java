@@ -11,20 +11,20 @@ import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
+
+
 /**
  *
  * @author Faisal
  */
-@WebServlet(name = "RemoveCompany", urlPatterns = {"/RemoveCompany"})
-public class RemoveCompany extends HttpServlet {
-
-@Override
-    protected void doGet(jakarta.servlet.http.HttpServletRequest request, jakarta.servlet.http.HttpServletResponse response)
-            throws jakarta.servlet.ServletException, IOException {
+@WebServlet(name = "LoginServlet1", urlPatterns = {"/LoginServlet1"})
+public class LoginServlet1 extends HttpServlet {
+     @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
             response.getWriter().append("Server at").append(request.getContextPath());
             RequestDispatcher dis=request.getRequestDispatcher("success.jsp");
            // processRequest(request, response)
@@ -36,47 +36,45 @@ public class RemoveCompany extends HttpServlet {
     }
 
     @Override
-    protected void doPost(jakarta.servlet.http.HttpServletRequest request, jakarta.servlet.http.HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             
-            throws jakarta.servlet.ServletException, IOException {
+            throws ServletException, IOException {
         String forwardreq="home.jsp";
-        boolean flag=true;        
+        
         try {
-           if(request.getParameter("Delete") != null)
+           if(request.getParameter("button2") != null)
            {
                DataBaseConnection db=new DataBaseConnection();
                 db.setConnection();
                 
-            String name=request.getParameter("Name");
-            if(name.equals("") )
+            String email=request.getParameter("email");
+            String pass=request.getParameter("password");
+            if(email.equals("") || pass.equals(""))
             {
                forwardreq="Error.jsp";
-               flag=false;
+            
             }
          
-            if(!db.searchInstitute(name))
+            if(!db.existUser(email,pass))
             {
                 
                forwardreq="Error3.jsp";
-            flag=false;
+            
             }
-            if(flag)
-            {
-                db.deleteCompany(name);
-            }
+            
            }
             RequestDispatcher dis=request.getRequestDispatcher(forwardreq);
             dis.forward(request, response);
            // processRequest(request, respons
         } catch (SQLException ex) {
-        Logger.getLogger(RemoveInstituteServlet.class.getName()).log(Level.SEVERE, null, ex);
-    }
+             Logger.getLogger(LoginServlet1.class.getName()).log(Level.SEVERE, null, ex);
+         }
     }
 
     
     @Override
     public String getServletInfo() {
         return "Short description";
-    }
+    }// </editor-fold>
 
 }

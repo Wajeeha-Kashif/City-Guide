@@ -4,25 +4,23 @@
  * and open the template in the editor.
  */
 package com.Registration;
-
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
+
+
 /**
  *
  * @author Faisal
  */
-@WebServlet(name = "RemoveCompany", urlPatterns = {"/RemoveCompany"})
-public class RemoveCompany extends HttpServlet {
-
-@Override
+@WebServlet(name = "ProfileServlet", urlPatterns = {"/ProfileServlet"})
+public class ProfileServlet extends HttpServlet {
+ @Override
     protected void doGet(jakarta.servlet.http.HttpServletRequest request, jakarta.servlet.http.HttpServletResponse response)
             throws jakarta.servlet.ServletException, IOException {
             response.getWriter().append("Server at").append(request.getContextPath());
@@ -39,44 +37,41 @@ public class RemoveCompany extends HttpServlet {
     protected void doPost(jakarta.servlet.http.HttpServletRequest request, jakarta.servlet.http.HttpServletResponse response)
             
             throws jakarta.servlet.ServletException, IOException {
-        String forwardreq="home.jsp";
-        boolean flag=true;        
+        String forwardreq="userData.jsp";
         try {
-           if(request.getParameter("Delete") != null)
+           if(request.getParameter("view") != null)
            {
                DataBaseConnection db=new DataBaseConnection();
                 db.setConnection();
                 
-            String name=request.getParameter("Name");
-            if(name.equals("") )
+            String email=request.getParameter("email");
+            String pass=request.getParameter("password");
+            if(email.equals("") || pass.equals(""))
             {
                forwardreq="Error.jsp";
-               flag=false;
+           
             }
          
-            if(!db.searchInstitute(name))
+            if(!db.existUser(email,pass))
             {
                 
                forwardreq="Error3.jsp";
-            flag=false;
+           
             }
-            if(flag)
-            {
-                db.deleteCompany(name);
-            }
+           
            }
             RequestDispatcher dis=request.getRequestDispatcher(forwardreq);
             dis.forward(request, response);
            // processRequest(request, respons
-        } catch (SQLException ex) {
-        Logger.getLogger(RemoveInstituteServlet.class.getName()).log(Level.SEVERE, null, ex);
-    }
+        } catch (SQLException ex) {  
+         Logger.getLogger(ProfileServlet.class.getName()).log(Level.SEVERE, null, ex);
+     }  
     }
 
     
     @Override
     public String getServletInfo() {
         return "Short description";
-    }
+    }// </editor-fold>
 
 }

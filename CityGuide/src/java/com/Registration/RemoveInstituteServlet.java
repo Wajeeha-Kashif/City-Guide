@@ -5,22 +5,21 @@
  */
 package com.Registration;
 
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
+
 /**
  *
  * @author Faisal
  */
-@WebServlet(name = "RemoveCompany", urlPatterns = {"/RemoveCompany"})
-public class RemoveCompany extends HttpServlet {
+@WebServlet(name = "RemoveInstituteServlet", urlPatterns = {"/RemoveInstituteServlet"})
+public class RemoveInstituteServlet extends HttpServlet {
 
 @Override
     protected void doGet(jakarta.servlet.http.HttpServletRequest request, jakarta.servlet.http.HttpServletResponse response)
@@ -62,7 +61,7 @@ public class RemoveCompany extends HttpServlet {
             }
             if(flag)
             {
-                db.deleteCompany(name);
+                db.deleteInstitue(name);
             }
            }
             RequestDispatcher dis=request.getRequestDispatcher(forwardreq);
@@ -78,5 +77,4 @@ public class RemoveCompany extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }
-
 }
