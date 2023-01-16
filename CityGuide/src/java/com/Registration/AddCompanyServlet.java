@@ -19,7 +19,7 @@ import jakarta.servlet.http.*;
 
 /**
  *
- * @author Faisal
+ * @author Wajeeha
  */
 @WebServlet(name = "AddCompanyServlet", urlPatterns = {"/AddCompanyServlet"})
 public class AddCompanyServlet extends HttpServlet {
