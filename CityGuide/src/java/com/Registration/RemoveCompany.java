@@ -17,7 +17,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 /**
  *
- * @author Faisal
+ * @author Wajeeha
  */
 @WebServlet(name = "RemoveCompany", urlPatterns = {"/RemoveCompany"})
 public class RemoveCompany extends HttpServlet {
