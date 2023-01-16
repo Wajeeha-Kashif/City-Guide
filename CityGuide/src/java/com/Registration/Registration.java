@@ -26,7 +26,7 @@ import javax.swing.border.LineBorder;
 
 /**
  *
- * @author Faisal
+ * @author Wajeeha
  */
 public class Registration
 {
