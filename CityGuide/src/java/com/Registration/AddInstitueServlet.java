@@ -18,7 +18,7 @@ import jakarta.servlet.http.*;
 
 /**
  *
- * @author Faisal
+ * @author Wajeeha
  */
 @WebServlet(name = "AddInstitueServlet", urlPatterns = {"/AddInstitueServlet"})
 public class AddInstitueServlet extends HttpServlet {
