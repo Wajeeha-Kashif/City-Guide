@@ -20,7 +20,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Faisal
+ * @author Wajeeha
  */
 public class DataBaseConnection {
     
@@ -50,7 +50,7 @@ public class DataBaseConnection {
                       Logger.getLogger(DataBaseConnection.class.getName()).log(Level.SEVERE, null, ex);
                  }
             
-            String Url="jdbc:ucanaccess://C:\\Users\\Wajeeha Kashsif\\Downloads\\Project\\Project\\Student.accdb";
+            String Url="jdbc:ucanaccess://Student.accdb";
     con=DriverManager.getConnection(Url);
             String sql="Select * from RegistrationData";
         
