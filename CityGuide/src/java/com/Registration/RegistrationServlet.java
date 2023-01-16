@@ -16,7 +16,7 @@ import jakarta.servlet.http.*;
 
 /**
  *
- * @author Faisal
+ * @author Wajeeha
  */
 public class RegistrationServlet extends HttpServlet {
   private Registration ob=new Registration();
